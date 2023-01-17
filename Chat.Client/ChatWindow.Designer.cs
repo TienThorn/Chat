@@ -89,6 +89,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "ChatWindow";
             this.Text = "ChatWindow";
+            this.Load += new System.EventHandler(this.ChatWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
