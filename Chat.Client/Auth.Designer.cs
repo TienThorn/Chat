@@ -1,6 +1,6 @@
 ﻿namespace Chat.Client
 {
-    partial class Form1
+    partial class Auth
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,6 +41,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Войти";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -58,7 +59,7 @@
             this.textBox1.Size = new System.Drawing.Size(149, 23);
             this.textBox1.TabIndex = 2;
             // 
-            // Form1
+            // Auth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -66,7 +67,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "Auth";
             this.Text = "Авторизация";
             this.ResumeLayout(false);
             this.PerformLayout();
