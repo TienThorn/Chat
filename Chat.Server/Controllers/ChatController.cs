@@ -12,16 +12,11 @@ namespace Chat.Server.Controllers
 
         public ChatController(MessagesRepository repository)
         {
-            _repository = new MessagesRepository(new List<Message>
-            {
-                new ("Аркадий", "Всем привет"),
-                new ("Вася", "Привет"),
-                new ("Петя", "И вам привет"),
-            });
+            _repository = repository;
         }
 
         [HttpGet]
-        public ActionResult<IList<Message>> GetAllMessages()
+        public ActionResult<List<Message>> GetAllMessages()
         {
             try
             {
@@ -30,8 +25,15 @@ namespace Chat.Server.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return Array.Empty<Message>();
+                return new List<Message>();
             }
+        }
+
+        [HttpPost]
+        public ActionResult AddMessage([FromBody] Message message)
+        {
+            _repository.AddMessage(message);
+            return Ok();
         }
     }
 }

@@ -3,6 +3,7 @@ using Chat.Server;
 using Chat.Server.Controllers;
 using Chat.Shared;
 using NUnit.Framework;
+using System.Linq;
 
 namespace Tests;
 
@@ -41,5 +42,15 @@ public class ChatControllerTests
         var actualList = controller.GetAllMessages().Value;
 
         Assert.IsEmpty(actualList!);
+    }
+
+    [Test]
+    public void AddMessage_PostMessageInRepository_ReturnsListWithNewMessage()
+    {
+        var controller = new ChatController(_messagesRepository);
+        Message newMessage = new Message("Игорь", "Всем привет!");    
+        controller.AddMessage(newMessage);
+        List<Message> currentMessages = controller.GetAllMessages().Value;
+        Assert.AreEqual(newMessage, currentMessages[currentMessages.Count - 1]);
     }
 }

@@ -10,4 +10,10 @@ public static class ChatService
         var response = await HttpSender.SendAsync(HttpMethod.Get, "chat");
         return await response.Content.ReadFromJsonAsync<List<Message>>();
     }
+
+    public static async Task AddMessage(string sender, string text)
+    {
+        Message message = new Message(sender, text);
+        var response = await HttpSender.SendAsync(HttpMethod.Post, "chat", message);
+    }
 }

@@ -37,56 +37,61 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(51, 12);
+            this.textBox1.Location = new System.Drawing.Point(58, 16);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(703, 255);
+            this.textBox1.Size = new System.Drawing.Size(803, 339);
             this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(51, 321);
+            this.textBox2.Location = new System.Drawing.Point(58, 428);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(703, 75);
+            this.textBox2.Size = new System.Drawing.Size(803, 99);
             this.textBox2.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(51, 402);
+            this.button1.Location = new System.Drawing.Point(58, 536);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 29);
+            this.button1.Size = new System.Drawing.Size(113, 39);
             this.button1.TabIndex = 2;
             this.button1.Text = "Отправить";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 15);
+            this.label1.Location = new System.Drawing.Point(8, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 15);
+            this.label1.Size = new System.Drawing.Size(0, 20);
             this.label1.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 294);
+            this.label2.Location = new System.Drawing.Point(58, 392);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 15);
+            this.label2.Size = new System.Drawing.Size(158, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Введите сообщение...";
             // 
             // ChatWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(914, 600);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ChatWindow";
             this.Text = "ChatWindow";
             this.Load += new System.EventHandler(this.ChatWindow_Load);
