@@ -22,6 +22,18 @@ namespace Chat.Client
 
         private async void ChatWindow_Load(object sender, EventArgs e)
         {
+            await RefreshMessagesList();
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            await ChatService.AddMessage("Аркаша", textBox2.Text);
+            textBox2.Text = "";
+            await RefreshMessagesList();
+        }
+
+        private async Task RefreshMessagesList()
+        {
             _messages = await ChatService.GetAllMessages();
             textBox1.Text = String.Join(Environment.NewLine, _messages);
         }

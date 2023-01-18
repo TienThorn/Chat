@@ -1,4 +1,5 @@
 ﻿using Chat.Shared;
+using System.Text.Json.Nodes;
 
 namespace Chat.Client;
 
@@ -14,6 +15,14 @@ public class HttpSender
 
     public static async Task<HttpResponseMessage> SendAsync(HttpMethod method, string uri)
     {
-        return await _httpClient.SendAsync(new HttpRequestMessage(method, uri));
+        HttpRequestMessage requestMessage = new HttpRequestMessage(method, uri);
+        return await _httpClient.SendAsync(requestMessage);
+    }
+
+    public static async Task<HttpResponseMessage> SendAsync(HttpMethod method, string uri, object body)
+    {
+        HttpRequestMessage requestMessage = new HttpRequestMessage(method, uri);
+        requestMessage.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(body), System.Text.Encoding.UTF8, "application/json");
+        return await _httpClient.SendAsync(requestMessage);
     }
 }
