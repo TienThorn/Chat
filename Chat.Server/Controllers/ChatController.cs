@@ -36,17 +36,18 @@ namespace Chat.Server.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        public ActionResult DeleteMessage([FromBody] int id)
-        {
-            _repository.DeleteMessage(id);
-            return Ok();
-        }
 
         [HttpPut]
         public ActionResult ChangeMessage([FromBody] Message message)
         {
-            //_repository.AddMessage(id);
+            _repository.AddMessage(message);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteMessage([FromBody] int id)
+        {
+            _repository.DeleteMessage(id);
             return Ok();
         }
 
