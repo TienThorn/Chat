@@ -1,4 +1,5 @@
-﻿using Chat.Shared;
+﻿using System.Linq;
+using Chat.Shared;
 
 namespace Chat.Server;
 
@@ -19,5 +20,10 @@ public class MessagesRepository
     public void AddMessage(Message message)
     {
         Messages.Add(message);
+    }
+
+    public void DeleteMessage(int id)
+    {
+        Messages.RemoveAll(x => x.Id == id);
     }
 }
