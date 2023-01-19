@@ -4,6 +4,7 @@ using Chat.Server.Controllers;
 using Chat.Shared;
 using NUnit.Framework;
 using System.Linq;
+using System;
 
 namespace Tests;
 
@@ -15,12 +16,15 @@ public class ChatControllerTests
     [SetUp]
     public void Setup()
     {
-        _messagesRepository = new MessagesRepository(new List<Message>
-        {
-            new ("Аркадий", "Всем привет"),
-            new ("Вася", "Привет"),
-            new ("Петя", "И вам привет"),
-        });
+        _messagesRepository = new MessagesRepository(new List<Message>());
+
+        Message message1 = new Message("Иван", "Всем привет!");
+        Message message2 = new Message("Аркадий", "Добрый день!");
+        Message message3 = new Message("Георгий","Рад всем!");
+
+        _messagesRepository.AddMessage(message1);
+        _messagesRepository.AddMessage(message2);
+        _messagesRepository.AddMessage(message3);
     }
 
     [Test]
@@ -40,7 +44,6 @@ public class ChatControllerTests
         var emptyRepository = new MessagesRepository();
         var controller = new ChatController(emptyRepository);
         var actualList = controller.GetAllMessages().Value;
-
         Assert.IsEmpty(actualList!);
     }
 
@@ -48,9 +51,26 @@ public class ChatControllerTests
     public void AddMessage_PostMessageInRepository_ReturnsListWithNewMessage()
     {
         var controller = new ChatController(_messagesRepository);
-        Message newMessage = new Message("Игорь", "Всем привет!");    
+        Message newMessage = new Message("Игорь", "Добрый вечер!");    
         controller.AddMessage(newMessage);
         List<Message> currentMessages = controller.GetAllMessages().Value;
         Assert.AreEqual(newMessage, currentMessages[currentMessages.Count - 1]);
+    }
+
+    [Test]
+    public void DeleteMessage_DeleteMessageInRepository_ReturnsListWithoutMessage()
+    {
+        Message message = _messagesRepository.Messages[0];
+        var controller = new ChatController(_messagesRepository);
+        controller.DeleteMessage(message.Id);
+        CollectionAssert.DoesNotContain(_messagesRepository.Messages, message);
+    }
+
+    [Test]
+    public void AddMessage_PostMessageInRepository_ThrowsNullArgumentException()
+    {
+        var chatController = new ChatController(_messagesRepository);
+        //Assert.Throws<ArgumentNullException>(chatController.AddMessage, null, null, null);
+        Assert.Throws<ArgumentNullException>(() => chatController.AddMessage(null));
     }
 }

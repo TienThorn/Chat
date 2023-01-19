@@ -18,6 +18,14 @@ public class MessagesRepository
 
     public List<Message> Messages { get; } = new();
 
+    public Message CreateMessage(string sender, string text)
+    {
+        Message message = new Message(sender, text, _messageIdCounter);
+        _messageIdCounter++;
+        return message;
+    }
+
+
     public void AddMessage(Message newMessage)
     {
         Message message = new Message(newMessage.Sender, newMessage.Text, _messageIdCounter);

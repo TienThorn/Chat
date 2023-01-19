@@ -15,6 +15,10 @@ namespace Chat.Server.Controllers
         [HttpPost("login")]
         public ActionResult Login([FromBody] string user)
         {
+            if (user is null) 
+            {
+                throw new ArgumentNullException(nameof(user));
+            }           
             _userRepository.Login(user);
             return Ok();
         }

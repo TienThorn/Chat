@@ -31,7 +31,11 @@ namespace Chat.Server.Controllers
 
         [HttpPost]
         public ActionResult AddMessage([FromBody] Message message)
-        {
+        {           
+            if (message is null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
             _repository.AddMessage(message);
             return Ok();
         }
