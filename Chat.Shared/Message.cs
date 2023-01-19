@@ -2,7 +2,7 @@
 {
     public class Message
     {  
-        public int Id { get; }
+        public int Id { get; set;  }
         
         public string Sender { get; set; }
 
@@ -29,6 +29,12 @@
         public override string ToString()
         {
             return $"[{Id}] {Sender}: {Text}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            Message message = obj as Message;
+            return Text == message.Text && Sender == message.Sender;
         }
     }
 }
