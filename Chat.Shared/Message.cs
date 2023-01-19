@@ -4,7 +4,7 @@
     {
         private static int _idCounter;
         
-        public int Id { get; set; }
+        public int Id { get; }
         
         public string Sender { get; set; }
 
@@ -16,8 +16,15 @@
             Sender = sender;
             Text = text;
         }
+
+        public Message()
+        {
+            Id = _idCounter++;
+        }
+
         public override string ToString()
         {
+            //return $"[{Id}] {Sender}: {Text}";
             return $"{Sender}: {Text}";
         }
     }
