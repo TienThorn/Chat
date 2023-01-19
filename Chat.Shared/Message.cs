@@ -24,7 +24,8 @@
 
         public override string ToString()
         {
-            return $"[{Id}] {Sender}: {Text}";
+            //return $"[{Id}] {Sender}: {Text}";
+            return $"{Sender}: {Text}";
         }
     }
 }

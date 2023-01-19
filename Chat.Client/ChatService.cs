@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Net.Http.Json;
+using System.Linq;
 using Message = Chat.Shared.Message;
 
 namespace Chat.Client;
@@ -12,7 +13,7 @@ public static class ChatService
         return await response.Content.ReadFromJsonAsync<List<Message>>();
     }
 
-    public static async Task AddMessage(string sender, string text)
+    private static async Task AddMessage(string sender, string text)
     {
         Message message = new Message(sender, text);
         var response = await HttpSender.SendAsync(HttpMethod.Post, "chat", message);
@@ -21,6 +22,13 @@ public static class ChatService
     private static async Task DeleteMessage(int id)
     {
         var response = await HttpSender.SendAsync(HttpMethod.Delete, "chat", id);
+    }
+
+    private static async Task ChangeMessage(int id, string text)
+    {
+        var response = await HttpSender.SendAsync(HttpMethod.Get, "chat/" + id);
+        Message message = await response.Content.ReadFromJsonAsync<Message>();
+        var newResponse = await HttpSender.SendAsync(HttpMethod.Put, "chat", message);
     }
 
     public static async Task SendMessage(string sender, string text)
@@ -56,6 +64,10 @@ public static class ChatService
         {
             return TypeMessage.DeleteMessage;
         }
+        else if (message.StartsWith("/change"))
+        {
+            return TypeMessage.ChangeMessage;
+        }
         else
         {
             return TypeMessage.Message;
@@ -66,6 +78,7 @@ public static class ChatService
     {
         Message,
         DeleteMessage,
-        BanUser
+        ChangeMessage,
+        BanUser,       
     }
 }

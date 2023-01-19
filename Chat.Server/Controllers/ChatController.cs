@@ -42,5 +42,19 @@ namespace Chat.Server.Controllers
             _repository.DeleteMessage(id);
             return Ok();
         }
+
+        [HttpPut]
+        public ActionResult ChangeMessage([FromBody] Message message)
+        {
+            //_repository.AddMessage(id);
+            return Ok();
+        }
+
+        [HttpGet("{id:int}")]
+        public ActionResult<Message> GetMessageById(int id)
+        {
+            return _repository.GetMessageById(id);
+        }
+
     }
 }

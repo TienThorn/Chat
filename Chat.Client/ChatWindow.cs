@@ -28,7 +28,7 @@ namespace Chat.Client
       
         private async void button1_Click(object sender, EventArgs e)
         {
-            await ChatService.SendMessage("Аркаша", textBox2.Text);           
+            await ChatService.SendMessage("Аркаша", textBox2.Text);
             await RefreshMessagesList();
         }
 
