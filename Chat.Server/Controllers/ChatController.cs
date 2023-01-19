@@ -36,7 +36,6 @@ namespace Chat.Server.Controllers
             return Ok();
         }
 
-
         [HttpPut]
         public ActionResult ChangeMessage([FromBody] Message message)
         {

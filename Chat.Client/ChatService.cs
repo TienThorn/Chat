@@ -10,8 +10,10 @@ public static class ChatService
     public static async Task<List<Message>?> GetAllMessages()
     {
         var response = await HttpSender.SendAsync(HttpMethod.Get, "chat");
-        return await response.Content.ReadFromJsonAsync<List<Message>>();
+        var result = await response.Content.ReadFromJsonAsync<List<Message>>();
+        return result;
     }
+
     public static async Task SendMessage(string sender, string text)
     {
         switch (CheckForCommand(text))
