@@ -12,25 +12,6 @@ public static class ChatService
         var response = await HttpSender.SendAsync(HttpMethod.Get, "chat");
         return await response.Content.ReadFromJsonAsync<List<Message>>();
     }
-
-    private static async Task AddMessage(string sender, string text)
-    {
-        Message message = new Message(sender, text);
-        var response = await HttpSender.SendAsync(HttpMethod.Post, "chat", message);
-    }
-
-    private static async Task DeleteMessage(int id)
-    {
-        var response = await HttpSender.SendAsync(HttpMethod.Delete, "chat", id);
-    }
-
-    private static async Task ChangeMessage(int id, string text)
-    {
-        var response = await HttpSender.SendAsync(HttpMethod.Get, "chat/" + id);
-        Message message = await response.Content.ReadFromJsonAsync<Message>();
-        var newResponse = await HttpSender.SendAsync(HttpMethod.Put, "chat", message);
-    }
-
     public static async Task SendMessage(string sender, string text)
     {
         switch (CheckForCommand(text))
@@ -52,6 +33,24 @@ public static class ChatService
                     break;
                 }
         }
+    }
+
+    private static async Task AddMessage(string sender, string text)
+    {
+        Message message = new Message(sender, text);
+        var response = await HttpSender.SendAsync(HttpMethod.Post, "chat", message);
+    }
+
+    private static async Task DeleteMessage(int id)
+    {
+        var response = await HttpSender.SendAsync(HttpMethod.Delete, "chat", id);
+    }
+
+    private static async Task ChangeMessage(int id, string text)
+    {
+        var response = await HttpSender.SendAsync(HttpMethod.Get, "chat/" + id);
+        Message message = await response.Content.ReadFromJsonAsync<Message>();
+        var newResponse = await HttpSender.SendAsync(HttpMethod.Put, "chat", message);
     }
 
     private static TypeMessage CheckForCommand(string message)
