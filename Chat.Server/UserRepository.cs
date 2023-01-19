@@ -26,44 +26,14 @@ namespace Chat.Server
             Users.Remove(user);
         }
 
-        public void Login(string newUser)
+        public void Login(string user)
         {
-            if (Users.Count == 0) 
-            {
-                AddUser(newUser);
-            }
-            else 
-            {
-                foreach (string user in Users.ToList())
-                {
-                    if (newUser == user)
-                    {
-                        RemoveUser(newUser);
-                        break;
-                    }
-                    AddUser(newUser);
-                }
-            }     
+            AddUser(user);
         }
 
-        public void Logout(string newUser)
+        public void Logout(string user)
         {
-            if (Users.Count == 0)
-            {
-                AddUser(newUser);
-            }
-            else
-            {
-                foreach (string user in Users)
-                {
-                    if (newUser == user)
-                    {
-                        RemoveUser(newUser);
-                        break;
-                    }
-                    AddUser(newUser);
-                }
-            }
+            RemoveUser(user);
         }
     }
 }

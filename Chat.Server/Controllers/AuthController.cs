@@ -12,18 +12,18 @@ namespace Chat.Server.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost]
-        public ActionResult Logout([FromBody] string user)
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] string user)
         {
             _userRepository.Login(user);
             return Ok();
         }
 
         [HttpPost("logout")]
-        public ActionResult Login([FromBody] string user)
+        public ActionResult Logout([FromBody] string user)
         {
-            _userRepository.Login(user);
+            _userRepository.Logout(user);
             return Ok();
-        }
+        }       
     }
 }
