@@ -25,6 +25,7 @@ public class MessagesRepository
         return message;
     }
 
+
     public void AddMessage(Message newMessage)
     {
         Message message = new Message(newMessage.Sender, newMessage.Text, _messageIdCounter);
