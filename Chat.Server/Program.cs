@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<MessagesRepository>();
+builder.Services.AddSingleton<UserRepository>();
 
 var app = builder.Build();
 

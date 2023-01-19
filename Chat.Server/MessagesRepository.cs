@@ -5,6 +5,7 @@ namespace Chat.Server;
 
 public class MessagesRepository
 {
+    private int _messageIdCounter = 0;
     public MessagesRepository()
     {
         
@@ -17,8 +18,10 @@ public class MessagesRepository
 
     public List<Message> Messages { get; } = new();
 
-    public void AddMessage(Message message)
+    public void AddMessage(Message newMessage)
     {
+        Message message = new Message(newMessage.Sender, newMessage.Text, _messageIdCounter);
+        _messageIdCounter++;
         Messages.Add(message);
     }
 
