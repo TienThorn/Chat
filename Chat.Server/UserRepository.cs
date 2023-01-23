@@ -6,7 +6,7 @@ namespace Chat.Server
     {
         public UserRepository()
         {
-
+            Users = new List<string>();
         }
 
         public UserRepository(IEnumerable<string> users)

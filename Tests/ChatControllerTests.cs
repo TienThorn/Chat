@@ -28,7 +28,7 @@ public class ChatControllerTests
     }
 
     [Test]
-    public void GetAllMessages_GetMessagesListJson_ReturnsListFromRepository()
+    public void GetAllMessages_GetListFromMessagesRepository_ReturnsListFromRepository()
     {
         var controller = new ChatController(_messagesRepository);
         
@@ -39,14 +39,14 @@ public class ChatControllerTests
     }
     
     [Test]
-    public void GetAllMessages_GetMessagesListJson_ReturnsEmptyListFromEmptyRepository()
+    public void GetAllMessages_GetEmptyListFromRepository_ReturnsEmptyListFromEmptyRepository()
     {
         var emptyRepository = new MessagesRepository();
         var controller = new ChatController(emptyRepository);
         var actualList = controller.GetAllMessages().Value;
         Assert.IsEmpty(actualList!);
     }
-
+    
     [Test]
     public void AddMessage_PostMessageInRepository_ReturnsListWithNewMessage()
     {
@@ -70,7 +70,6 @@ public class ChatControllerTests
     public void AddMessage_PostMessageInRepository_ThrowsNullArgumentException()
     {
         var chatController = new ChatController(_messagesRepository);
-        //Assert.Throws<ArgumentNullException>(chatController.AddMessage, null, null, null);
         Assert.Throws<ArgumentNullException>(() => chatController.AddMessage(null));
     }
 }

@@ -11,41 +11,37 @@ namespace Tests
     [TestFixture]
     public class AuthControllerTests
     {
-        private UserRepository _userRepository;
-
-        [SetUp]
-        public void Setup()
-        {
-            _userRepository = new UserRepository(new List<string>());
-
-            string user1 = "Виктор";
-            string user2 = "Егор";
-            string user3 = "Иван";
-        }
-
         [Test]
         public void Login_AddUserInRepository_ReturnsListWithUser()
         {
-            var authController = new AuthController(_userRepository);
+            var userRepository = new UserRepository(new List<string>());
+
+            var authController = new AuthController(userRepository);
             string user = "Никита";
             authController.Login(user);
-            CollectionAssert.Contains(_userRepository.Users, user);
+            CollectionAssert.Contains(userRepository.Users, user);
         }
 
         [Test]
         public void Logout_RemoveUserFromRepository_ReturnsListWithoutUser()
         {
-            var authController = new AuthController(_userRepository);
-            string user = "Иван";     
+            var userRepository = new UserRepository(new List<string>()
+            {
+                "Иван",
+            });
+
+            var authController = new AuthController(userRepository);
+            string user = "Иван";
             authController.Logout(user);
-            CollectionAssert.DoesNotContain(_userRepository.Users, user);
+            CollectionAssert.DoesNotContain(userRepository.Users, user);
         }
 
         [Test]
-        public void Login_AddUserInRepository_ThrowsNullArgumentException()
+        public void Login_AddNullUserInRepository_ThrowsNullArgumentException()
         {
-            var authController = new AuthController(_userRepository);
-            Assert.Throws<ArgumentNullException>(()=> authController.Login(null));
+            var userRepository = new UserRepository(new List<string>());
+            var authController = new AuthController(userRepository);
+            Assert.Throws<ArgumentNullException>(() => authController.Login(null));
         }
     }
 }
