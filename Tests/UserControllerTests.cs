@@ -39,6 +39,13 @@ namespace Tests
             CollectionAssert.AreEqual(users, userController.GetOnlineUsers().Value);
         }
 
-        
+        [Test]
+        public void GetOnlineUsers_GetEmptyListFromRepository_ReturnsEmptyListFromEmptyRepository()
+        {
+            var emptyRepository = new UserRepository();
+            var controller = new UserController(emptyRepository);
+            var actualList = controller.GetOnlineUsers().Value;
+            Assert.IsEmpty(actualList!);
+        }
     }
 }
